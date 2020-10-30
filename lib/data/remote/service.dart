@@ -128,13 +128,11 @@ Future<List<PriceData>> getPriceSeries({
 }) async {
   final response = await http
       .get(
-        '$_baseUrl/v1/ohlcv/$assetId/USD/latest?period_id=$duration&limit=$points',
+        '$_baseUrl/v1/ohlcv/$assetId/USD/latest?'
+        'period_id=$duration&limit=$points',
         headers: _headers,
       )
       .timeout(_timeLimit);
-
-  print(
-      '$_baseUrl/v1/ohlcv/$assetId/USD/latest?period_id=$duration&limit=$points&apiKey=$_apiKey');
 
   if (response.statusCode == 200) {
     final List<dynamic> list = json.decode(response.body);
