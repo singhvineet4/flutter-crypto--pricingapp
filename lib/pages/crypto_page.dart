@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:cryptolist/data/remote/rest.dart';
+import 'package:cryptolist/data/remote/remote.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -1,4 +1,4 @@
-import 'package:cryptolist/data/remote/rest.dart';
+import 'package:cryptolist/data/remote/remote.dart';
 import 'package:cryptolist/pages/crypto_page.dart';
 import 'package:flutter/material.dart';
 
