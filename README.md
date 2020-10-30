@@ -1,4 +1,4 @@
-<img src="images/logo.png" alt="list page loading" height="100" />
+<img src="images/logo.png" alt="list page loading"/>
 
 # CryptoList
 
