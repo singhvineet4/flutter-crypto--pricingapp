@@ -1,5 +1,11 @@
+<img src="images/logo.png" alt="list page loading" style="zoom:50%;" />
+
 # CryptoList
 
-**IN PROGRESS ...**
+A Flutter application to show cryptocurrency prices.
 
-A cryptocurrency price list application written with Flutter.
+If you want to clone this project create a [CoinAPI](https://rest.coinapi.io) API key and set it to `_apiKey` variable in file `data/remote/service.dart`.
+
+If you press cryptocurrency icon in it's dedicated page it will search google about it.
+
+<img src="images/list_page_loading.png" alt="list page loading" style="zoom:25%;" /><img src="images/list_page_1.png" alt="list page 1" style="zoom:25%;" /><img src="images/list_page_2.png" alt="list page 2" style="zoom:25%;" /><img src="images/list_page_filter_1.png" alt="list page filter 1" style="zoom:25%;" /><img src="images/list_page_filter_2.png" alt="list page filter 2" style="zoom:25%;" /><img src="images/crypto_page_loading.png" alt="crypto page loading" style="zoom:25%;" /><img src="images/crypto_page.png" alt="crypto page" style="zoom:25%;" />
