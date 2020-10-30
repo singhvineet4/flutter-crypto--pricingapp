@@ -1,6 +1,7 @@
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/crypto_page.dart';
 import 'package:flutter/material.dart';
+
+import 'file:///C:/Android/fws/cryptolist/lib/pages/crypto/crypto_page.dart';
 
 class ListPage extends StatefulWidget {
   @override

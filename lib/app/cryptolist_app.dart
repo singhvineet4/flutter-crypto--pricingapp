@@ -1,5 +1,6 @@
-import 'package:cryptolist/pages/list_page.dart';
 import 'package:flutter/material.dart';
+
+import 'file:///C:/Android/fws/cryptolist/lib/pages/list/list_page.dart';
 
 class CryptolistApp extends StatelessWidget {
   @override
