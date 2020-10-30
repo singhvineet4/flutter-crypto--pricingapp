@@ -1,7 +1,6 @@
-import 'dart:math' as math;
-
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:cryptolist/data/remote/remote.dart';
+import 'package:cryptolist/pages/crypto/chart_widget.dart';
+import 'package:cryptolist/pages/crypto/price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,7 +19,8 @@ class _CryptoPageState extends State<CryptoPage> {
   void _launchWebsite() {
     try {
       launch(
-        'https://www.google.com/search?q=${widget.crypto.name}, ${widget.crypto.assetId}',
+        'https://www.google.com/search?q='
+        '${widget.crypto.name}, ${widget.crypto.assetId}',
       );
     } catch (e) {
       print(e);
@@ -94,19 +94,19 @@ class _CryptoPageState extends State<CryptoPage> {
               SizedBox(
                 height: 16.0,
               ),
-              RowPairWidget(
+              PriceWidget(
                 name: 'Price',
                 price: widget.crypto.priceUsd,
               ),
-              RowPairWidget(
+              PriceWidget(
                 name: 'Monthly',
                 price: widget.crypto.volume1MthUsd,
               ),
-              RowPairWidget(
+              PriceWidget(
                 name: 'Daily',
                 price: widget.crypto.volume1DayUsd,
               ),
-              RowPairWidget(
+              PriceWidget(
                 name: 'Hourly',
                 price: widget.crypto.volume1HrsUsd,
               ),
@@ -128,8 +128,6 @@ class _CryptoPageState extends State<CryptoPage> {
                         return ChartWidget.create(data);
                       }
 
-                      print(snapshot.error);
-
                       return Text(
                         'Error, please reload ...',
                         style: TextStyle(
@@ -146,84 +144,6 @@ class _CryptoPageState extends State<CryptoPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class RowPairWidget extends StatelessWidget {
-  RowPairWidget({
-    @required this.name,
-    @required this.price,
-  });
-
-  final String name;
-  final double price;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.baseline,
-      textBaseline: TextBaseline.alphabetic,
-      children: [
-        Text(
-          name,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        Text(
-          '${price.toStringAsFixed(3)}\$',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-      ],
-    );
-  }
-}
-
-class ChartWidget extends StatelessWidget {
-  final List<charts.Series<TimedData, DateTime>> seriesList;
-  final double min;
-  final double max;
-
-  ChartWidget(this.seriesList, this.min, this.max);
-
-  factory ChartWidget.create(List<TimedData> data) {
-    final series = charts.Series<TimedData, DateTime>(
-      id: 'Price',
-      colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-      domainFn: (TimedData e, _) => e.time,
-      measureFn: (TimedData e, _) => e.data,
-      data: data,
-    );
-
-    final numbers = data.map((e) => e.data).toList();
-    final min = numbers.reduce(math.min);
-    final max = numbers.reduce(math.max);
-    final dist = max - min;
-
-    return ChartWidget(
-      [
-        series,
-      ],
-      min - dist / 5,
-      max + dist / 5,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return charts.TimeSeriesChart(
-      seriesList,
-      animate: false,
-      dateTimeFactory: charts.LocalDateTimeFactory(),
-      behaviors: [
-        charts.PanAndZoomBehavior(),
-      ],
-      primaryMeasureAxis: charts.NumericAxisSpec(
-        viewport: charts.NumericExtents.fromValues([
-          min,
-          max,
-        ]),
       ),
     );
   }
