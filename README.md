@@ -1,4 +1,4 @@
-# cryptolist
+# CryptoList
 
 **IN PROGRESS ...**
 
