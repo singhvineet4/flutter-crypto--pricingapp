@@ -8,7 +8,7 @@ If you want to clone this project create a [CoinAPI](https://rest.coinapi.io) AP
 
 If you press cryptocurrency icon in it's dedicated page it will search google about it.
 
-<img src="images/list_page_loading.png" alt="list page loading" width="128" />
+<img src="images/list_page_loading.png" alt="list page loading" width="50%" />
 <img src="images/list_page_1.png" alt="list page 1" width="128" />
 <img src="images/list_page_2.png" alt="list page 2" width="128" />
 <img src="images/list_page_filter_1.png" alt="list page filter 1" width="128" />
