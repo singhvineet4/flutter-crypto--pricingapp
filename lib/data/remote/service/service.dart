@@ -10,6 +10,7 @@ export 'package:cryptolist/data/remote/service/model/asset.dart';
 export 'package:cryptolist/data/remote/service/model/asset_icon.dart';
 export 'package:cryptolist/data/remote/service/model/price_data.dart';
 
+@immutable
 class Service {
   static const _apiKey = '0FC53B29-D9BB-4BFE-8438-73C33A2D89BC';
 
@@ -28,9 +29,9 @@ class Service {
   Future<List<Asset>> getAssets() async {
     final response = await http
         .get(
-          '$_baseUrl/v1/assets',
-          headers: _headers,
-        )
+      '$_baseUrl/v1/assets',
+      headers: _headers,
+    )
         .timeout(_timeLimit);
 
     if (response.statusCode == 200) {
@@ -45,9 +46,9 @@ class Service {
   Future<List<AssetIcon>> getAssetIcons() async {
     final response = await http
         .get(
-          '$_baseUrl/v1/assets/icons/512x512',
-          headers: _headers,
-        )
+      '$_baseUrl/v1/assets/icons/512x512',
+      headers: _headers,
+    )
         .timeout(_timeLimit);
 
     if (response.statusCode == 200) {
@@ -66,10 +67,10 @@ class Service {
   }) async {
     final response = await http
         .get(
-          '$_baseUrl/v1/ohlcv/$assetId/USD/latest?'
+      '$_baseUrl/v1/ohlcv/$assetId/USD/latest?'
           'period_id=$duration&limit=$points',
-          headers: _headers,
-        )
+      headers: _headers,
+    )
         .timeout(_timeLimit);
 
     if (response.statusCode == 200) {

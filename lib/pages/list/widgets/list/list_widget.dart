@@ -3,11 +3,13 @@ import 'package:cryptolist/pages/crypto/crypto_page.dart';
 import 'package:flutter/material.dart';
 
 class ListWidget extends StatefulWidget {
+  final CryptoPageCreator cryptoPageCreator;
+  final List<Crypto> cryptos;
+
   const ListWidget({
+    @required this.cryptoPageCreator,
     @required this.cryptos,
   });
-
-  final List<Crypto> cryptos;
 
   @override
   _ListWidgetState createState() => _ListWidgetState();
@@ -129,7 +131,10 @@ class _ListWidgetState extends State<ListWidget> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CryptoPage(crypto: crypto),
+                      builder: (context) => widget.cryptoPageCreator(
+                        context,
+                        crypto: crypto,
+                      ),
                     ),
                   );
                 },

@@ -16,7 +16,7 @@ dependencies:
   bloc: ^6.1.0
   equatable: ^1.2.3
   rxdart: ^0.24.1
-#  flutter_bloc: ^6.1.1
+  flutter_bloc: ^6.1.1
 
 flutter:
   uses-material-design: true

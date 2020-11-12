@@ -6,16 +6,14 @@ import 'package:meta/meta.dart';
 export 'package:cryptolist/data/remote/model/crypto.dart';
 export 'package:cryptolist/data/remote/model/time_data.dart';
 
-const remote = Remote();
-
 class Remote {
-  final Service _service = const Service();
+  final Service service;
 
-  const Remote();
+  const Remote({@required this.service});
 
   Future<List<Crypto>> getCryptos() async {
-    final assets = await _service.getAssets();
-    final assetIcons = await _service.getAssetIcons();
+    final assets = await service.getAssets();
+    final assetIcons = await service.getAssetIcons();
 
     final icons = Map.fromIterable(
       assetIcons,
@@ -50,7 +48,7 @@ class Remote {
   Future<List<TimedData>> getTimeSeries({
     @required String assetId,
   }) async {
-    final list = await _service.getPriceSeries(
+    final list = await service.getPriceSeries(
       assetId: assetId,
       duration: '1HRS',
       points: 24 * 30,

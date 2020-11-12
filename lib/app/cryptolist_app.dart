@@ -1,8 +1,16 @@
+import 'package:cryptolist/data/remote/remote.dart';
+import 'package:cryptolist/pages/crypto/crypto_page.dart';
+import 'package:cryptolist/pages/list/bloc/list_page_bloc.dart';
+import 'package:cryptolist/pages/list/list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'file:///C:/Android/fws/cryptolist/lib/pages/list/list_page.dart';
-
+@immutable
 class CryptolistApp extends StatelessWidget {
+  final Remote remote;
+
+  const CryptolistApp({@required this.remote});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,7 +39,17 @@ class CryptolistApp extends StatelessWidget {
           ),
         ),
       ),
-      home: ListPage(),
+      home: BlocProvider(
+        create: (context) => ListPageBloc(
+          remote: remote,
+        ),
+        child: ListPage(
+          cryptoPageCreator: (context, {crypto}) => CryptoPage(
+            remote: remote,
+            crypto: crypto,
+          ),
+        ),
+      ),
     );
   }
 }

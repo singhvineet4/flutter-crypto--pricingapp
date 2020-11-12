@@ -4,10 +4,13 @@ import 'package:cryptolist/pages/crypto/price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+typedef Widget CryptoPageCreator(BuildContext context, {Crypto crypto});
+
 class CryptoPage extends StatefulWidget {
+  final Remote remote;
   final Crypto crypto;
 
-  CryptoPage({@required this.crypto});
+  CryptoPage({@required this.remote, @required this.crypto});
 
   @override
   _CryptoPageState createState() => _CryptoPageState();
@@ -16,19 +19,17 @@ class CryptoPage extends StatefulWidget {
 class _CryptoPageState extends State<CryptoPage> {
   Future _future;
 
-  void _launchWebsite() {
+  Future _launchWebsite() async {
     try {
-      launch(
-        'https://www.google.com/search?q='
-        '${widget.crypto.name}, ${widget.crypto.assetId}',
-      );
-    } catch (e) {
-      print(e);
-    }
+      final url = 'https://www.google.com/search?q=${widget.crypto.name}';
+      if (await canLaunch(url)) {
+        await launch(url);
+      }
+    } catch (_) {}
   }
 
   void _loadData() {
-    _future = remote.getTimeSeries(assetId: widget.crypto.assetId);
+    _future = widget.remote.getTimeSeries(assetId: widget.crypto.assetId);
   }
 
   @override
