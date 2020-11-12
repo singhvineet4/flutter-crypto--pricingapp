@@ -18,7 +18,7 @@ class _ListPageState extends State<ListPage> {
   }
 
   void _load() {
-    _future = getCryptos();
+    _future = remote.getCryptos();
   }
 
   @override

@@ -28,7 +28,7 @@ class _CryptoPageState extends State<CryptoPage> {
   }
 
   void _loadData() {
-    _future = getTimeSeries(assetId: widget.crypto.assetId);
+    _future = remote.getTimeSeries(assetId: widget.crypto.assetId);
   }
 
   @override
