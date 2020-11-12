@@ -4,12 +4,13 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:cryptolist/data/remote/remote.dart';
 import 'package:flutter/material.dart';
 
+@immutable
 class ChartWidget extends StatelessWidget {
   final List<charts.Series<TimedData, DateTime>> seriesList;
   final double min;
   final double max;
 
-  ChartWidget(this.seriesList, this.min, this.max);
+  const ChartWidget(this.seriesList, this.min, this.max);
 
   factory ChartWidget.create(List<TimedData> data) {
     final series = charts.Series<TimedData, DateTime>(
