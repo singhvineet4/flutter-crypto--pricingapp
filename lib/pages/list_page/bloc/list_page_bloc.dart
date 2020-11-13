@@ -1,16 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/list/bloc/list_page_event.dart';
-import 'package:cryptolist/pages/list/bloc/list_page_state.dart';
-import 'package:meta/meta.dart';
+import 'package:cryptolist/pages/list_page/bloc/list_page_event.dart';
+import 'package:cryptolist/pages/list_page/bloc/list_page_state.dart';
 
-export 'package:cryptolist/pages/list/bloc/list_page_event.dart';
-export 'package:cryptolist/pages/list/bloc/list_page_state.dart';
+export 'package:cryptolist/pages/list_page/bloc/list_page_event.dart';
+export 'package:cryptolist/pages/list_page/bloc/list_page_state.dart';
 
 class ListPageBloc extends Bloc<ListPageEvent, ListPageState> {
-  final Remote remote;
-
-  ListPageBloc({@required this.remote}) : super(ListPageStateEmpty());
+  ListPageBloc() : super(ListPageStateEmpty());
 
   @override
   Stream<ListPageState> mapEventToState(ListPageEvent event) async* {

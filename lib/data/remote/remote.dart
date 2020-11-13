@@ -6,6 +6,11 @@ import 'package:meta/meta.dart';
 export 'package:cryptolist/data/remote/model/crypto.dart';
 export 'package:cryptolist/data/remote/model/time_data.dart';
 
+// todo change this
+const remote = Remote(
+  service: Service(),
+);
+
 class Remote {
   final Service service;
 

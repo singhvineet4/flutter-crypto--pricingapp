@@ -1,16 +1,15 @@
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/crypto/chart_widget.dart';
-import 'package:cryptolist/pages/crypto/price_widget.dart';
+import 'package:cryptolist/pages/crypto_page/widgets/chart_widget/chart_widget.dart';
+import 'package:cryptolist/pages/crypto_page/widgets/price_widget/price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 typedef Widget CryptoPageCreator(BuildContext context, {Crypto crypto});
 
 class CryptoPage extends StatefulWidget {
-  final Remote remote;
   final Crypto crypto;
 
-  CryptoPage({@required this.remote, @required this.crypto});
+  CryptoPage({@required this.crypto});
 
   @override
   _CryptoPageState createState() => _CryptoPageState();
@@ -29,7 +28,7 @@ class _CryptoPageState extends State<CryptoPage> {
   }
 
   void _loadData() {
-    _future = widget.remote.getTimeSeries(assetId: widget.crypto.assetId);
+    _future = remote.getTimeSeries(assetId: widget.crypto.assetId);
   }
 
   @override

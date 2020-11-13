@@ -1,14 +1,9 @@
-import 'package:cryptolist/pages/crypto/crypto_page.dart';
-import 'package:cryptolist/pages/list/bloc/list_page_bloc.dart';
-import 'package:cryptolist/pages/list/widgets/list/list_widget.dart';
+import 'package:cryptolist/pages/list_page/bloc/list_page_bloc.dart';
+import 'package:cryptolist/pages/list_page/widgets/list_widget/list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListPage extends StatefulWidget {
-  final CryptoPageCreator cryptoPageCreator;
-
-  const ListPage({@required this.cryptoPageCreator});
-
   @override
   _ListPageState createState() => _ListPageState();
 }
@@ -74,9 +69,10 @@ class _ListPageState extends State<ListPage> {
             }
 
             if (state is ListPageStateSuccess) {
+              final cryptos = state.cryptos;
+
               return ListWidget(
-                cryptoPageCreator: widget.cryptoPageCreator,
-                cryptos: state.cryptos,
+                cryptos: cryptos,
               );
             }
 
