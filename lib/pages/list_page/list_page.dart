@@ -76,7 +76,7 @@ class _ListPageState extends State<ListPage> {
             }
 
             if (state is ListPageStateSuccess) {
-              return ListWidget(
+              return ListWidget.create(
                 cryptos: state.cryptos,
               );
             }

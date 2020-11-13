@@ -3,6 +3,12 @@ import 'package:cryptolist/pages/crypto_page/crypto_page.dart';
 import 'package:flutter/material.dart';
 
 class ListWidget extends StatefulWidget {
+  static Widget create({@required List<Crypto> cryptos}) {
+    return ListWidget(
+      cryptos: cryptos,
+    );
+  }
+
   final List<Crypto> cryptos;
 
   ListWidget({
