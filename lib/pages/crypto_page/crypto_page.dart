@@ -7,6 +7,12 @@ import 'package:url_launcher/url_launcher.dart';
 typedef Widget CryptoPageCreator(BuildContext context, {Crypto crypto});
 
 class CryptoPage extends StatefulWidget {
+  static Widget create({@required Crypto crypto}) {
+    return CryptoPage(
+      crypto: crypto,
+    );
+  }
+
   final Crypto crypto;
 
   CryptoPage({@required this.crypto});

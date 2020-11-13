@@ -1,7 +1,5 @@
-import 'package:cryptolist/pages/list_page/bloc/list_page_bloc.dart';
 import 'package:cryptolist/pages/list_page/list_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 @immutable
 class CryptolistApp extends StatelessWidget {
@@ -33,10 +31,7 @@ class CryptolistApp extends StatelessWidget {
           ),
         ),
       ),
-      home: BlocProvider(
-        create: (context) => ListPageBloc(),
-        child: ListPage(),
-      ),
+      home: ListPage.create(),
     );
   }
 }
