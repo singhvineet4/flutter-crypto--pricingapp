@@ -126,8 +126,7 @@ class _ListWidgetState extends State<ListWidget> {
                   ],
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => CryptoPage(
                         crypto: crypto,
