@@ -10,9 +10,15 @@ class ChartWidget extends StatelessWidget {
   final double min;
   final double max;
 
-  const ChartWidget(this.seriesList, this.min, this.max);
+  ChartWidget(
+    this.seriesList,
+    this.min,
+    this.max,
+  );
 
-  factory ChartWidget.create(List<TimedData> data) {
+  factory ChartWidget.create({
+    @required List<TimedData> data,
+  }) {
     final series = charts.Series<TimedData, DateTime>(
       id: 'Price',
       colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,

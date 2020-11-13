@@ -1,15 +1,20 @@
 import 'package:cryptolist/data/remote/remote.dart';
+import 'package:cryptolist/pages/crypto_page/bloc/crypto_page_bloc.dart';
 import 'package:cryptolist/pages/crypto_page/widgets/chart_widget/chart_widget.dart';
 import 'package:cryptolist/pages/crypto_page/widgets/price_widget/price_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 typedef Widget CryptoPageCreator(BuildContext context, {Crypto crypto});
 
 class CryptoPage extends StatefulWidget {
   static Widget create({@required Crypto crypto}) {
-    return CryptoPage(
-      crypto: crypto,
+    return BlocProvider(
+      create: (context) => CryptoPageBloc(),
+      child: CryptoPage(
+        crypto: crypto,
+      ),
     );
   }
 
@@ -22,7 +27,7 @@ class CryptoPage extends StatefulWidget {
 }
 
 class _CryptoPageState extends State<CryptoPage> {
-  Future _future;
+  CryptoPageBloc _bloc;
 
   Future _launchWebsite() async {
     try {
@@ -34,14 +39,24 @@ class _CryptoPageState extends State<CryptoPage> {
   }
 
   void _loadData() {
-    _future = remote.getTimeSeries(assetId: widget.crypto.assetId);
+    _bloc.add(CryptoPageEventLoad(
+      assetId: widget.crypto.assetId,
+    ));
   }
 
   @override
   void initState() {
+    _bloc = BlocProvider.of<CryptoPageBloc>(context);
+
     _loadData();
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _bloc?.close();
+    super.dispose();
   }
 
   @override
@@ -121,25 +136,30 @@ class _CryptoPageState extends State<CryptoPage> {
               ),
               Expanded(
                 child: Center(
-                  child: FutureBuilder(
-                    future: _future,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState != ConnectionState.done) {
+                  child: BlocBuilder(
+                    cubit: _bloc,
+                    builder: (context, state) {
+                      if (state is CryptoPageStateLoading) {
                         return CircularProgressIndicator();
                       }
 
-                      if (snapshot.hasData) {
-                        final List<TimedData> data = snapshot.data;
-
-                        return ChartWidget.create(data);
+                      if (state is CryptoPageStateError) {
+                        return Text(
+                          'Error, please reload ...',
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
+                        );
                       }
 
-                      return Text(
-                        'Error, please reload ...',
-                        style: TextStyle(
-                          color: Colors.red,
-                        ),
-                      );
+                      if (state is CryptoPageStateSuccess) {
+                        return ChartWidget.create(
+                          data: state.data,
+                        );
+                      }
+
+                      // CryptoPageStateEmpty
+                      return Container();
                     },
                   ),
                 ),

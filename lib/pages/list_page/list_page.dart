@@ -29,7 +29,7 @@ class _ListPageState extends State<ListPage> {
 
   @override
   void dispose() {
-    _bloc.close();
+    _bloc?.close();
 
     super.dispose();
   }
@@ -76,10 +76,8 @@ class _ListPageState extends State<ListPage> {
             }
 
             if (state is ListPageStateSuccess) {
-              final cryptos = state.cryptos;
-
               return ListWidget(
-                cryptos: cryptos,
+                cryptos: state.cryptos,
               );
             }
 

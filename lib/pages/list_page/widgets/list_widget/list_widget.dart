@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class ListWidget extends StatefulWidget {
   final List<Crypto> cryptos;
 
-  const ListWidget({
+  ListWidget({
     @required this.cryptos,
   });
 

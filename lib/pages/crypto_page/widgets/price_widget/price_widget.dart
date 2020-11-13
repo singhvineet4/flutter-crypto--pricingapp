@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 @immutable
 class PriceWidget extends StatelessWidget {
-  const PriceWidget({
+  PriceWidget({
     @required this.name,
     @required this.price,
   });
