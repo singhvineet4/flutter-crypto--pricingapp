@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 void main() {
   EquatableConfig.stringify = false;
 
-  final service = Service();
-  final remote = Remote(service: service);
-
   runApp(
     CryptolistApp(
-      remote: remote,
+      remote: Remote(
+        service: Service(),
+      ),
     ),
   );
 }
