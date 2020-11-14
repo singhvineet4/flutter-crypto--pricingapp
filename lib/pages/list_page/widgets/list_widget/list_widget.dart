@@ -1,19 +1,18 @@
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/crypto_page/crypto_page.dart';
+import 'package:cryptolist/pages/list_page/widgets/crypto_list_item_widget/crypto_list_item_widget.dart';
+import 'package:cryptolist/pages/list_page/widgets/list_widget/bloc/list_widget_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListWidget extends StatefulWidget {
   static Widget create({@required List<Crypto> cryptos}) {
-    return ListWidget(
-      cryptos: cryptos,
+    return BlocProvider(
+      create: (context) => ListWidgetBloc(
+        allCryptos: cryptos,
+      ),
+      child: ListWidget(),
     );
   }
-
-  final List<Crypto> cryptos;
-
-  ListWidget({
-    @required this.cryptos,
-  });
 
   @override
   _ListWidgetState createState() => _ListWidgetState();
@@ -21,11 +20,11 @@ class ListWidget extends StatefulWidget {
 
 class _ListWidgetState extends State<ListWidget> {
   final TextEditingController _controller = TextEditingController();
-  List<Crypto> _filteredCryptos;
+  ListWidgetBloc _bloc;
 
   @override
   void initState() {
-    _filteredCryptos = widget.cryptos;
+    _bloc = BlocProvider.of<ListWidgetBloc>(context);
 
     super.initState();
   }
@@ -34,6 +33,7 @@ class _ListWidgetState extends State<ListWidget> {
   void dispose() {
     _controller.value = TextEditingValue.empty;
     _controller.dispose();
+    _bloc?.close();
 
     super.dispose();
   }
@@ -57,8 +57,7 @@ class _ListWidgetState extends State<ListWidget> {
                       icon: Icon(Icons.cancel_outlined),
                       onPressed: () {
                         setState(() {
-                          _controller.text = '';
-                          _filteredCryptos = widget.cryptos;
+                          _clearFilter();
                         });
                       },
                     ),
@@ -79,86 +78,57 @@ class _ListWidgetState extends State<ListWidget> {
             textAlignVertical: TextAlignVertical.center,
             onChanged: (_) {
               setState(() {
-                _filter();
+                _checkFilter();
               });
             },
           ),
         ),
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              final crypto = _filteredCryptos[index];
+        BlocBuilder(
+          cubit: _bloc,
+          builder: (context, state) {
+            if (state is ListWidgetStateWithData) {
+              final cryptos = state.cryptos;
 
-              return ListTile(
-                leading: Hero(
-                  tag: 'crypto_${crypto.assetId}_icon',
-                  child: Image.network(
-                    crypto.iconUrl,
-                    fit: BoxFit.contain,
-                    height: 48.0,
-                    width: 48.0,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        height: 48.0,
-                        width: 48.0,
-                        decoration: BoxDecoration(
-                          color: Colors.blueGrey,
-                          shape: BoxShape.circle,
-                        ),
-                      );
-                    },
-                  ),
+              return Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final crypto = cryptos[index];
+
+                    return CryptoListItemWidget(crypto: crypto);
+                  },
+                  itemCount: cryptos.length,
                 ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Text(crypto.name),
-                    Text(
-                      '${crypto.priceUsd.toStringAsFixed(3)}\$',
-                    ),
-                  ],
-                ),
-                subtitle: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.alphabetic,
-                  children: [
-                    Text(crypto.assetId),
-                    Text(
-                      'Monthly ${crypto.volume1MthUsd.toStringAsFixed(1)}\$',
-                    ),
-                  ],
-                ),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => CryptoPage.create(
-                        crypto: crypto,
-                      ),
-                    ),
-                  );
-                },
               );
-            },
-            itemCount: _filteredCryptos.length,
-          ),
+            }
+
+            // without data
+            return Text(
+              'No item found.',
+              textAlign: TextAlign.center,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .bodyText1,
+            );
+          },
         ),
       ],
     );
   }
 
-  void _filter() {
-    final text = _controller.text.trim().toLowerCase();
+  void _clearFilter() {
+    _controller.value = TextEditingValue.empty;
+    _bloc.add(ListWidgetEventClearFilter());
+  }
+
+  void _checkFilter() {
+    final text = _controller.text.trim();
     if (text.isEmpty) {
-      _filteredCryptos = widget.cryptos;
+      _clearFilter();
     } else {
-      _filteredCryptos = widget.cryptos
-          .where((e) =>
-              e.assetId.toLowerCase().contains(text) ||
-              e.name.toLowerCase().contains(text))
-          .toList();
+      _bloc.add(ListWidgetEventFilter(
+        filterText: text,
+      ));
     }
   }
 }
