@@ -36,7 +36,7 @@ class Remote {
 
     list.sort((a, b) => b.volume1MthUsd.compareTo(a.volume1MthUsd));
 
-    return list
+    final cryptos = list
         .take(100)
         .map((e) => Crypto(
               assetId: e.assetId,
@@ -48,6 +48,12 @@ class Remote {
               iconUrl: icons[e.assetId],
             ))
         .toList();
+
+    if (cryptos.isEmpty) {
+      throw 'Error: Empty cryptos!';
+    }
+
+    return cryptos;
   }
 
   Future<List<TimedData>> getTimeSeries({
@@ -59,11 +65,18 @@ class Remote {
       points: 24 * 30,
     );
 
-    return list
-        .map((e) => TimedData(
-              e.timePeriodEnd,
-              (e.priceLow + e.priceHigh) / 2,
-            ))
+    final series = list
+        .map((e) =>
+        TimedData(
+          e.timePeriodEnd,
+          (e.priceLow + e.priceHigh) / 2,
+        ))
         .toList();
+
+    if (series.length < 2) {
+      throw 'Error: Empty series!';
+    }
+
+    return series;
   }
 }
