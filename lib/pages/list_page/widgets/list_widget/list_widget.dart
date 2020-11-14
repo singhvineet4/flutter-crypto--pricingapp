@@ -1,5 +1,5 @@
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/list_page/widgets/crypto_list_item_widget/crypto_list_item_widget.dart';
+import 'package:cryptolist/pages/list_page/widgets/list_item_widget/list_item_widget.dart';
 import 'package:cryptolist/pages/list_page/widgets/list_widget/bloc/list_widget_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,7 +94,7 @@ class _ListWidgetState extends State<ListWidget> {
                   itemBuilder: (context, index) {
                     final crypto = cryptos[index];
 
-                    return CryptoListItemWidget(crypto: crypto);
+                    return ListItemWidget(crypto: crypto);
                   },
                   itemCount: cryptos.length,
                 ),
@@ -105,10 +105,7 @@ class _ListWidgetState extends State<ListWidget> {
             return Text(
               'No item found.',
               textAlign: TextAlign.center,
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .bodyText1,
+              style: Theme.of(context).textTheme.bodyText1,
             );
           },
         ),
