@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/list_page/widgets/list_widget/bloc/list_widget_event.dart';
-import 'package:cryptolist/pages/list_page/widgets/list_widget/bloc/list_widget_state.dart';
+import 'package:cryptolist/widgets/list_widget/bloc/list_widget_event.dart';
+import 'package:cryptolist/widgets/list_widget/bloc/list_widget_state.dart';
 import 'package:meta/meta.dart';
 
-export 'package:cryptolist/pages/list_page/widgets/list_widget/bloc/list_widget_event.dart';
-export 'package:cryptolist/pages/list_page/widgets/list_widget/bloc/list_widget_state.dart';
+export 'package:cryptolist/widgets/list_widget/bloc/list_widget_event.dart';
+export 'package:cryptolist/widgets/list_widget/bloc/list_widget_state.dart';
 
 class ListWidgetBloc extends Bloc<ListWidgetEvent, ListWidgetState> {
   final List<Crypto> allCryptos;

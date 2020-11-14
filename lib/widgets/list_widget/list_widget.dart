@@ -1,6 +1,6 @@
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/list_page/widgets/list_item_widget/list_item_widget.dart';
-import 'package:cryptolist/pages/list_page/widgets/list_widget/bloc/list_widget_bloc.dart';
+import 'package:cryptolist/widgets/list_item_widget/list_item_widget.dart';
+import 'package:cryptolist/widgets/list_widget/bloc/list_widget_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

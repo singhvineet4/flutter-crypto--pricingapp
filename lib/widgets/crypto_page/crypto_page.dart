@@ -1,7 +1,7 @@
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/crypto_page/bloc/crypto_page_bloc.dart';
-import 'package:cryptolist/pages/crypto_page/widgets/chart_widget/chart_widget.dart';
-import 'package:cryptolist/pages/crypto_page/widgets/price_widget/price_widget.dart';
+import 'package:cryptolist/widgets/chart_widget/chart_widget.dart';
+import 'package:cryptolist/widgets/crypto_page/bloc/crypto_page_bloc.dart';
+import 'package:cryptolist/widgets/price_widget/price_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -1,4 +1,4 @@
-import 'package:cryptolist/pages/list_page/list_page.dart';
+import 'package:cryptolist/widgets/list_page/list_page.dart';
 import 'package:flutter/material.dart';
 
 @immutable

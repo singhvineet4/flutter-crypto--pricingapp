@@ -1,5 +1,5 @@
 import 'package:cryptolist/data/remote/remote.dart';
-import 'package:cryptolist/pages/crypto_page/crypto_page.dart';
+import 'package:cryptolist/widgets/crypto_page/crypto_page.dart';
 import 'package:flutter/material.dart';
 
 class ListItemWidget extends StatelessWidget {
