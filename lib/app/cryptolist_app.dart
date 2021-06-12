@@ -7,6 +7,8 @@ class CryptolistApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'CryptoList',
+      debugShowCheckedModeBanner:
+          false, //remove debug showchecked mode banner to do false @ck 6/11/2021
       theme: ThemeData.light().copyWith(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryColor: Colors.blue,

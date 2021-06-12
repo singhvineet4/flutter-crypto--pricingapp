@@ -23,7 +23,8 @@ class PriceWidget extends StatelessWidget {
         ),
         Text(
           '${price.toStringAsFixed(3)}\$',
-          style: Theme.of(context).textTheme.headline6,
+          style: TextStyle(fontSize: 18),
+          //provided textStyle with size to fix the over hided pixel issues @ck 6/11/21
         ),
       ],
     );

@@ -88,12 +88,13 @@ class _CryptoPageState extends State<CryptoPage> {
                   child: Image.network(
                     widget.crypto.iconUrl,
                     fit: BoxFit.contain,
-                    height: 128.0,
-                    width: 128.0,
+                    height: 120.0,
+                    width: 120.0, // change the size of container @ck 06/11/2021
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
-                        height: 128.0,
-                        width: 128.0,
+                        height: 120.0,
+                        width:
+                            120.0, // change the size of container @ck 06/11/2021
                         decoration: BoxDecoration(
                           color: Colors.blueGrey,
                           shape: BoxShape.circle,

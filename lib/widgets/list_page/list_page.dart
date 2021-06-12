@@ -23,7 +23,7 @@ class _ListPageState extends State<ListPage> {
     _bloc = BlocProvider.of<ListPageBloc>(context);
 
     _load();
-
+    print(_bloc);
     super.initState();
   }
 
@@ -63,7 +63,6 @@ class _ListPageState extends State<ListPage> {
                 child: CircularProgressIndicator(),
               );
             }
-
             if (state is ListPageStateError) {
               return Center(
                 child: Text(
@@ -74,7 +73,6 @@ class _ListPageState extends State<ListPage> {
                 ),
               );
             }
-
             if (state is ListPageStateSuccess) {
               return ListWidget.create(
                 cryptos: state.cryptos,

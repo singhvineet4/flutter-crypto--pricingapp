@@ -34,9 +34,15 @@ class ListItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.baseline,
         textBaseline: TextBaseline.alphabetic,
         children: [
-          Text(crypto.name),
+          Text(
+            crypto.name,
+            style: TextStyle(color: Colors.black, fontSize: 15),
+            //provided textStyle with size to fix the over hided pixel issues @ck 6/11/21
+          ),
           Text(
             '${crypto.priceUsd.toStringAsFixed(3)}\$',
+            style: TextStyle(color: Colors.black, fontSize: 15),
+            //provided textStyle with size to fix the over hided pixel issues @ck 6/11/21
           ),
         ],
       ),
@@ -45,9 +51,15 @@ class ListItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.baseline,
         textBaseline: TextBaseline.alphabetic,
         children: [
-          Text(crypto.assetId),
+          Text(
+            crypto.assetId,
+            style: TextStyle(color: Colors.black, fontSize: 12),
+            //provided textStyle with size to fix the over hided pixel issues @ck 6/11/21
+          ),
           Text(
             'Monthly ${crypto.volume1MthUsd.toStringAsFixed(1)}\$',
+            style: TextStyle(color: Colors.black, fontSize: 12),
+            //provided textStyle with size to fix the over hided pixel issues @ck 6/11/21
           ),
         ],
       ),

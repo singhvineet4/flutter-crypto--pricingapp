@@ -15,6 +15,8 @@ class CryptoPageBloc extends Bloc<CryptoPageEvent, CryptoPageState> {
       yield CryptoPageStateLoading();
       try {
         final assetId = event.assetId;
+        print('ckrk----------------------------------------' +
+            assetId.toString());
         final data = await remote.getTimeSeries(assetId: assetId);
         yield CryptoPageStateSuccess(data: data);
       } catch (_) {
